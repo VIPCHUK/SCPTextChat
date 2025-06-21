@@ -1,15 +1,13 @@
-﻿namespace ScpChat
-{
-    using System.Collections.Generic;
-    using System.ComponentModel;
-    using Exiled.API.Interfaces;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using Exiled.API.Interfaces;
 
+namespace ScpChat
+{
     public class Config : IConfig
     {
-        [Description("Включить или выключить плагин.")]
+        [Description("Включить или выключить плагин по умолчанию при старте сервера.")]
         public bool IsEnabled { get; set; } = true;
-        
-        [Description("Debug")]
         public bool Debug { get; set; } = true;
 
         [Description("Задержка в секундах между отправкой сообщений одним игроком.")]
@@ -18,20 +16,18 @@
         [Description("Максимальное количество символов в одном сообщении.")]
         public int CharacterLimit { get; set; } = 120;
 
-        [Description("Список ролей, которые могут использовать и видеть этот чат. Принимает RoleTypeId (например, Scp173) и названия групп из remote admin (например, owner).")]
-        public List<string> AllowedRoles { get; set; } = new List<string>
-        {
-            "Scp049",
-            "Scp079",
-            "Scp096",
-            "Scp106",
-            "Scp173",
-            "Scp939"
-        };
+        [Description("Список ролей, которые могут использовать и видеть этот чат. Принимает RoleTypeId (например, Scp173).")]
+        public List<string> AllowedRoles { get; set; } = new List<string> { "Scp049", "Scp079", "Scp096", "Scp106", "Scp173", "Scp939" };
         
-        [Description("Формат отображаемого сообщения. {scp_number} - номер SCP, {player} - имя отправителя, {message} - текст сообщения.")]
+        [Description("Разрешение (permission), необходимое для использования админ-команд (.sctoggle, .scpspy).")]
+        public string AdminPermission { get; set; } = "scpchat.admin";
+
+        [Description("Формат отображаемого сообщения. {scp_number}, {player}, {message}.")]
         public string MessageFormat { get; set; } = "[<color=red>{scp_number}</color>] {player}: {message}";
         
+        [Description("Формат тестового сообщения.")]
+        public string TestMessageFormat { get; set; } = "[<color=yellow>ТЕСТ</color>] {player}: {message}";
+
         [Description("Продолжительность отображения сообщения на экране в секундах.")]
         public ushort MessageDuration { get; set; } = 5;
     }
