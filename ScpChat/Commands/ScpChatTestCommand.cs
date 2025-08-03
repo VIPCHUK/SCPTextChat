@@ -11,26 +11,25 @@ namespace ScpChat.Commands
     {
         public string Command => "sctest";
         public string[] Aliases => new string[0];
-        public string Description => "Тестирует видимость сообщений в SCP чате.";
+        public string Description => Plugin.Instance?.Config?.Translation?.ScpChatTestCommandDescription ?? "[DEBUG] Тестирует видимость сообщений в SCP чате.";
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             Player player = Player.Get(sender);
             if (player == null)
             {
-                response = "Эту команду могут использовать только игроки.";
+                response = Plugin.Instance.Config.Translation.PlayersOnly;
                 return false;
             }
             
             if (!player.CheckPermission(Plugin.Instance.Config.AdminPermission))
             {
-                response = "У вас нет доступа к этому чату.";
+                response = Plugin.Instance.Config.Translation.NoPermission;
                 return false;
             }
-
-            Plugin.Instance.BroadcastMessage(player, "Это тестовое сообщение.", true);
+            Plugin.Instance.BroadcastMessage(player, Plugin.Instance.Config.Translation.TestMessage, true);
             
-            response = "Тестовое сообщение отправлено.";
+            response = Plugin.Instance.Config.Translation.TestMessageSent;
             return true;
         }
     }

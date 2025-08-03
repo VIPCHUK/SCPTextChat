@@ -11,32 +11,32 @@ namespace ScpChat.Commands
     {
         public string Command => "scpchat";
         public string[] Aliases => new[] { "sc" };
-        public string Description => "Отправляет сообщение в чат SCP.";
+        public string Description => Plugin.Instance?.Config?.Translation?.ScpChatCommandDescription ?? "Отправляет сообщение в чат SCP.";
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             Player player = Player.Get(sender);
             if (player == null)
             {
-                response = "Эту команду могут использовать только игроки.";
+                response = Plugin.Instance.Config.Translation.PlayersOnly;
                 return false;
             }
 
             if (!Plugin.Instance.IsChatEnabled)
             {
-                response = "Чат SCP в данный момент отключен администратором.";
+                response = Plugin.Instance.Config.Translation.PluginDisabled;
                 return false;
             }
             
             if (!player.HasScpChatPermission())
             {
-                response = "У вас нет доступа к этому чату.";
+                response = Plugin.Instance.Config.Translation.NoAccess;
                 return false;
             }
 
             if (arguments.Count == 0)
             {
-                response = "Ошибка: сообщение не может быть пустым.";
+                response = Plugin.Instance.Config.Translation.EmptyMessage;
                 return false;
             }
 
@@ -44,20 +44,32 @@ namespace ScpChat.Commands
 
             if (message.Length > Plugin.Instance.Config.CharacterLimit)
             {
-                response = $"Ошибка: сообщение слишком длинное (макс: {Plugin.Instance.Config.CharacterLimit}).";
+                response = string.Format(Plugin.Instance.Config.Translation.MessageTooLong, Plugin.Instance.Config.CharacterLimit);
                 return false;
             }
 
             if (Plugin.Instance.IsOnCooldown(player))
             {
-                response = "Ошибка: подождите перед отправкой следующего сообщения.";
+                var remainingTime = Plugin.Instance.GetRemainingCooldown(player);
+                response = string.Format(Plugin.Instance.Config.Translation.OnCooldown, Math.Ceiling(remainingTime));
                 return false;
             }
+
+            bool hadFormatting = Plugin.Instance.Config.BlockFormatting && 
+                                Plugin.Instance.SanitizeMessage(message) != message;
 
             Plugin.Instance.BroadcastMessage(player, message);
             Plugin.Instance.SetCooldown(player);
 
-            response = "Сообщение отправлено в чат SCP.";
+            if (hadFormatting)
+            {
+                response = Plugin.Instance.Config.Translation.MessageSent + " " + Plugin.Instance.Config.Translation.FormattingRemoved;
+            }
+            else
+            {
+                response = Plugin.Instance.Config.Translation.MessageSent;
+            }
+            
             return true;
         }
     }
