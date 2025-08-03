@@ -6,6 +6,8 @@
 3. **Install**: Place `ScpChat.dll` in your `EXILED/Plugins` folder
 4. **Configure**: Edit the generated config file to your preferences
 5. **Restart**: Restart your server to load the plugin
+6. 
+<img width="1277" height="162" alt="image" src="https://github.com/user-attachments/assets/331983aa-b451-4c1f-a4b9-986869cc15c3" />
 
 ## ⚙️ Configuration
 
