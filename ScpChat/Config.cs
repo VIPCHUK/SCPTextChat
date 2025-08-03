@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.ComponentModel;
 using Exiled.API.Interfaces;
 
@@ -6,38 +6,38 @@ namespace ScpChat
 {
     public class Config : IConfig
     {
-        [Description("Включить или выключить плагин по умолчанию при старте сервера.")]
+        [Description("Enable or disable the plugin by default when the server starts.")]
         public bool IsEnabled { get; set; } = true;
         public bool Debug { get; set; } = true;
 
-        [Description("Задержка в секундах между отправкой сообщений одним игроком.")]
+        [Description("Cooldown in seconds between sending messages by one player.")]
         public int CooldownSeconds { get; set; } = 5;
 
-        [Description("Максимальное количество символов в одном сообщении.")]
+        [Description("Maximum number of characters in one message.")]
         public int CharacterLimit { get; set; } = 120;
 
-        [Description("Список ролей, которые могут использовать и видеть этот чат. Принимает RoleTypeId (например, Scp173).")]
+        [Description("List of roles that can use and see this chat. Accepts RoleTypeId (e.g., Scp173).")]
         public List<string> AllowedRoles { get; set; } = new List<string> { "Scp049", "Scp079", "Scp096", "Scp106", "Scp173", "Scp939", "Scp0492", "Scp3114" };
         
-        [Description("Список кастомных ролей (CustomRoles), которые могут использовать и видеть этот чат. Укажите точные названия кастомных ролей.")]
-        public List<string> AllowedCustomRoles { get; set; } = new List<string> { "SCP-343" };
+        [Description("List of custom roles (CustomRoles) that can use and see this chat. Specify exact custom role names.")]
+        public List<string> AllowedCustomRoles { get; set; } = new List<string>();
         
-        [Description("Разрешение (permission), необходимое для использования админ-команд (.sctoggle, .scpspy).")]
+        [Description("Permission required to use admin commands (.sctoggle, .scpspy).")]
         public string AdminPermission { get; set; } = "scpchat.admin";
 
-        [Description("Формат отображаемого сообщения. {scp_number}, {player}, {message}.")]
+        [Description("Display message format. Available placeholders: {scp_number}, {player}, {message}.")]
         public string MessageFormat { get; set; } = "[<color=red>{scp_number}</color>] {player}: {message}";
         
-        [Description("Формат тестового сообщения.")]
+        [Description("Test message format.")]
         public string TestMessageFormat { get; set; } = "[<color=yellow>DEBUG</color>] {player}: {message}";
 
-        [Description("Продолжительность отображения сообщения на экране в секундах.")]
+        [Description("Message display duration on screen in seconds.")]
         public ushort MessageDuration { get; set; } = 5;
         
-        [Description("Блокировать теги форматирования Unity Rich Text в сообщениях игроков.")]
+        [Description("Block Unity Rich Text formatting tags in player messages (recommended: true).")]
         public bool BlockFormatting { get; set; } = true;
         
-        [Description("Настройки локализации плагина.")]
+        [Description("Plugin localization settings.")]
         public Translation Translation { get; set; } = new Translation();
     }
 }
