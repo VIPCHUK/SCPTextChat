@@ -1,4 +1,5 @@
-# ScpChat - SCP Communication Plugin for EXILED
+### ScpChat 
+SCP Text Chat for EXILED
 
 ## Installation
 1. **Prerequisites**: Ensure you have EXILED 9.6.0+ installed on your SCP:SL server
