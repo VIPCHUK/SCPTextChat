@@ -28,7 +28,7 @@ namespace ScpChat.Commands
                 return false;
             }
             Plugin.Instance.BroadcastMessage(player, Plugin.Instance.Config.Translation.TestMessage, true);
-            
+            Plugin.Instance.BroadcastMessage(player, Plugin.Instance.Config.Translation.TestMessage, true);
             response = Plugin.Instance.Config.Translation.TestMessageSent;
             return true;
         }

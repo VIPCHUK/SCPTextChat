@@ -27,6 +27,7 @@ namespace ScpChat.Commands
                 Plugin.Instance.Config.Translation.Disabled;
             
             response = string.Format(Plugin.Instance.Config.Translation.ChatToggleSuccess, status);
+            
             return true;
         }
     }

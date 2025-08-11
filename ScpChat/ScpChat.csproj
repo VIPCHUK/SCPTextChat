@@ -108,7 +108,6 @@
         <Compile Include="Commands\ScpChatCommand.cs" />
         <Compile Include="Commands\ScpChatDebugCommand.cs" />
         <Compile Include="Commands\ScpChatSpyCommand.cs" />
-        <Compile Include="Commands\ScpChatStatusCommand.cs" />
         <Compile Include="Commands\ScpChatTestCommand.cs" />
         <Compile Include="Commands\ScpChatToggleCommand.cs" />
         <Compile Include="Config.cs" />
