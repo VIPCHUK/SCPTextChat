@@ -20,7 +20,7 @@ namespace ScpChat
         private readonly Dictionary<Player, DateTime> _cooldowns = new Dictionary<Player, DateTime>();
 
         public override string Name => "SCPChat";
-        public override string Author => "honvert";
+        public override string Author => "vipchuk + hnvrt";
         public override Version Version => new Version(2, 0, 0);
         public override Version RequiredExiledVersion => new Version(8, 8, 0);
 
